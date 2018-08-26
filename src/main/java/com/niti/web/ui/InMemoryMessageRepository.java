@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.web.ui;
+package com.niti.web.ui;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

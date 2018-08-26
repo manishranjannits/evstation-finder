@@ -14,13 +14,9 @@
  * limitations under the License.
  */
 
-package sample.web.ui.mvc;
+package com.niti.web.ui.mvc;
 
 import javax.validation.Valid;
-
-import sample.web.ui.Message;
-import sample.web.ui.MessageRepository;
-import sample.web.ui.SampleWebUiApplication;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -35,6 +31,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niti.service.AddStation;
 import com.niti.simulator.data.SimulatorData;
+import com.niti.web.ui.Message;
+import com.niti.web.ui.MessageRepository;
+import com.niti.web.ui.SampleWebUiApplication;
 
 @Controller
 @RequestMapping("/")

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.web.ui;
+package com.niti.web.ui;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
