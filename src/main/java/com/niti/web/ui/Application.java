@@ -27,7 +27,7 @@ import com.orientechnologies.orient.core.command.script.OCommandFunction;
 import com.tinkerpop.blueprints.impls.orient.OrientGraphNoTx;
 
 @SpringBootApplication
-public class SampleWebUiApplication {
+public class Application {
 
 	private static OrientGraphNoTx graphNoTx = null;
 	
@@ -66,7 +66,7 @@ public class SampleWebUiApplication {
 		clearDb();
 		
 		SimulatorData.fillSimulatorData(graphNoTx);
-		SpringApplication.run(SampleWebUiApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 	
 	

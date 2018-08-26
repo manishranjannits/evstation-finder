@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.niti.simulator.data.SimulatorData;
-import com.niti.web.ui.SampleWebUiApplication;
+import com.niti.web.ui.Application;
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
@@ -34,7 +34,7 @@ public class AddStation {
 		
 		OrientGraphNoTx graph = null;
 		try {
-			graph = SampleWebUiApplication.getGraphNoTx();
+			graph = Application.getGraphNoTx();
 			DijkastraTraverser traverser = new DijkastraTraverser(graph, edgeClassName, weightProp);
 			
 			List<Vertex> listOfVertices = new ArrayList<>(); 
@@ -63,7 +63,7 @@ public class AddStation {
 	}
 	
 	private void addForDelta() {
-		OrientGraphNoTx graph = SampleWebUiApplication.getGraphNoTx();
+		OrientGraphNoTx graph = Application.getGraphNoTx();
 		try {
 			double mileage = 40D;
 			  //Add code here

@@ -33,7 +33,7 @@ import com.niti.service.AddStation;
 import com.niti.simulator.data.SimulatorData;
 import com.niti.web.ui.Message;
 import com.niti.web.ui.MessageRepository;
-import com.niti.web.ui.SampleWebUiApplication;
+import com.niti.web.ui.Application;
 
 @Controller
 @RequestMapping("/")
@@ -106,13 +106,13 @@ public class MessageController {
 	
 	@RequestMapping("resetdb")
 	public @ResponseBody String resetdb() {
-		SampleWebUiApplication.clearDb();
+		Application.clearDb();
 		return "{success: true}";
 	}
 	
 	@RequestMapping("setup")
 	public @ResponseBody String setup() {
-		SimulatorData.fillSimulatorData(SampleWebUiApplication.getGraphNoTx());
+		SimulatorData.fillSimulatorData(Application.getGraphNoTx());
 		return "{success: true}";
 	}
 
