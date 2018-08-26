@@ -321,7 +321,7 @@ public class DijkastraTraverser {
             }
             
             Double distance = getWeight(prev, current, Direction.OUT, exclECl);
-            //mileage = getMileage(prev);
+            mileage = getMileage(prev);
             
             if(distance > mileage) {
             	addStationsBetween2Nodes(prev, current, distance, mileage, path);
