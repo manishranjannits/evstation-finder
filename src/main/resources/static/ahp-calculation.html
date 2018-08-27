@@ -32,64 +32,44 @@
         <ul class="nav navbar-nav" data-0="margin-top:20px;" data-300="margin-top:5px;">
           <li><a href="index.html">Home</a></li>
           <li><a href="index.html#section-about">About</a></li>
-          <li class="active"><a href="simulator.html">Simulator</a></li>
-          <li><a href="ahp-calculation.html">AHP Calculation</a></li>
+          <li><a href="simulator.html">Simulator</a></li>
+          <li class="active"><a href="ahp-calculation.html">AHP Calculation</a></li>
         </ul>
       </div>
       <!--/.navbar-collapse -->
     </div>
   </div>
 	<div class="jumbotron" style="margin-top: 75px;">
-		<h2>EV Station Location Identification Simulator</h2>
+		<h2>Analytic Hierarchy Process Calculations</h2>
 		<p></p>
 		<p>
-			To see Default Setup, click "Check Default Setup" button. Use
-			"username": <b>admin</b> and "password": <b>admin</b>
-			
+			We applied Analytic Hierarchy Process (AHP) on the factors which govern selection of an Electric Vehicle Charging Station.
+			<br/>In case of any decision making scenario from multiple suitable locations in a tentative area, 
+			<br/>we can use this mathematical model and this template, to identify most suitable location. 
 		</p>
-		<p>To run Simulator, click "Go" button.</p>
-		<p></p>
-
-		<div class="loader"> </div>
-		<p>
-			<a class="btn btn-lg btn-primary redo-setup" style="visibility: hidden"
-				href="javascript:void(0)"
-				role="button" onclick="setup()">Redo Initial Setup &raquo;</a> 
-				
-			<a class="btn btn-lg btn-primary default-setup"
-				href="javascript:void(0)"
-				role="button" onclick="displayinst()">Check Default Setup &raquo;</a>
-			
-			<a class="btn btn-lg btn-primary do-simulation" href="javascript:void(0)"
-				role="button" onclick="sendForSimulation()">Go &raquo;</a>
-		</p>
-		<p></p>
 		
+		<p>	
+			Based on the calculations, following are the results
+		</p>
+		
+		<p>
+			In order to view/add changes to view the solution at work, 
+			<br/>please download the MS Excel File from <a href="AHP_Template.xls" target="_blank">here</a>
+		</p>		
 	</div>
 	<div style="padding-left:30px;">
 		
 		<p>
-			<a class="btn btn-lg btn-primary simulator-result"
-				style="visibility: hidden" target="_blank"
-				href="http://nitigraph.centralindia.cloudapp.azure.com:2480/studio/index.html#/database/testdb/graph"
-				role="button">Check Result &raquo;</a> 
+			For example, there are 4 spots in an area where we can setup a Charging Station.
+			<br/> These 4 spots vary on various factors. We can apply the weights on the measurable values
+			<br/> of these factors to calculate the overall score. Overall Score will give us an idea which
+			<br/> spot to choose.
 			
-			<a class="btn btn-lg btn-primary simulator-result reset-db"
-				style="visibility: hidden" onclick="resetdb()"
-				href="javascript:void(0)" role="button">Reset Database &raquo;</a>
 		</p>
+		<p><img alt="ahp-calculation" src="AHP-Score.png"></p>
+		<p>The Template Example was downloaded from <a href="http://scbuk.com/ahp.html" target="_blank">here</a></p>
 	</div>
-	<div class="instruction" style="display: none; padding-left: 30px;">
-			<p>Go through the instructions given below</p>
-			<p><b>INSTRUCTIONS</b></p>
-			<p>Please copy the following command, paste on the Graph Editor and press Run Query Button</p>
-			<p>Command: <pre style="width: 200px;"><code class="javascript"><i>select * from V</i></code></pre></p>
-			<img alt="instructions" src="instruction.png">
-			<a class="btn btn-lg btn-primary default-setup" style="margin-left: 30px;"
-					href="http://nitigraph.centralindia.cloudapp.azure.com:2480/studio/index.html#/database/testdb/graph"
-					role="button" target="_blank">Check Default Setup Now &raquo;</a>
-				
-		</div>
+	
 	
 	<script type="text/javascript"
 		src="webjars/bootstrap/3.0.3/js/bootstrap.min.js"></script>
