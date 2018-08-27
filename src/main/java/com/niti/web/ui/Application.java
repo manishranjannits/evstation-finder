@@ -55,7 +55,7 @@ public class Application {
 		          new OCommandFunction(ServiceConstants.RESET_COMMAND)).execute();
 		try {
 			System.out.println("Refreshing Simulator database...");
-			Thread.sleep(5000);
+			Thread.sleep(7000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
