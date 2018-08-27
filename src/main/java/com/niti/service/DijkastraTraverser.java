@@ -315,13 +315,19 @@ public class DijkastraTraverser {
             Vertex current = graph.getVertex(i);
             Vertex prev = graph.getVertex(j);
             //Continue backward traversal to find previous vertex which is of Location class or type = place
-            while(!prev.getProperty(ServiceConstants.PROPERTY_TYPE).toString().equalsIgnoreCase(ServiceConstants.TYPE_PLACE) && j != null) {
+            while(prev!=null && !prev.getProperty(ServiceConstants.PROPERTY_TYPE).toString().equalsIgnoreCase(ServiceConstants.TYPE_PLACE) && j != null) {
             	j = idPrevNodeIdMap.get(j);
             	prev = graph.getVertex(j);
             }
             
             Double distance = getWeight(prev, current, Direction.OUT, exclECl);
-            mileage = getMileage(prev);
+            
+            /*if(prev != null) {
+            	mileage = getMileage(prev);
+            }else {
+            	mileage = getMileage(current);
+            }*/
+            
             System.out.println("Milege::" + mileage);
             
             if(distance > mileage) {
