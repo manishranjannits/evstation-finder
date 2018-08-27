@@ -189,7 +189,7 @@ public class DijkastraTraverser {
     	double distanceLeft;
     	int countOfStations = (int)(distance/mileage);
     	
-    	for(int c=1; c<= countOfStations && distance>mileage; c++) {
+    	for(int c=1; c<= countOfStations && distance > mileage; c++) {
     		prevLat = prev.getProperty("lat");
         	prevLon = prev.getProperty("lon");
         	currentLat = current.getProperty("lat");
@@ -197,9 +197,10 @@ public class DijkastraTraverser {
         	lat = (currentLat + prevLat) * mileage * c/distance;
         	lon = (currentLon + prevLon) * mileage * c/distance; 
         	chargerVertex = SimulatorData.addStation(ServiceConstants.CHARGER_CLASS, lat, lon, ServiceConstants.CHARGER_CLASS);
-        	SimulatorData.addRoad("Charger 1", mileage, prev, chargerVertex);
+        	Edge edge1 = SimulatorData.addRoad("Charger 1", mileage, prev, chargerVertex);
 			distanceLeft = distance - mileage;
-			SimulatorData.addRoad("Charger 2", distanceLeft, chargerVertex, current);
+			Edge edge2 = SimulatorData.addRoad("Charger 2", distanceLeft, chargerVertex, current);
+			
 			Edge edge = getEdge(prev, current);
 			graph.removeEdge(edge);
 			path.add(chargerVertex);
@@ -302,7 +303,7 @@ public class DijkastraTraverser {
             return null;
         }
         //Mileage to be a calculative value
-        Double mileage = 40D;
+        Double mileage = 18D;
         
         //Start Traversing from End Vertex till Start Vertex is Reached
         while(!i.equals(startV.getId().toString())){
@@ -322,11 +323,11 @@ public class DijkastraTraverser {
             
             Double distance = getWeight(prev, current, Direction.OUT, exclECl);
             
-            /*if(prev != null) {
+            if(prev != null) {
             	mileage = getMileage(prev);
             }else {
             	mileage = getMileage(current);
-            }*/
+            }
             
             System.out.println("Milege::" + mileage);
             

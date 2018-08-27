@@ -67,7 +67,7 @@ public class AddStation {
 	private void addForDelta(OrientGraphNoTx graph) {
 		
 		try {
-			double mileage = 40D;
+			double mileage = 20D;
 			  //Add code here
 			graph.getVerticesOfClass("Location").forEach(v -> {
 				StringBuilder sb = new StringBuilder();
@@ -89,6 +89,7 @@ public class AddStation {
 						if(incomingVertex.getProperty("type").toString().equalsIgnoreCase("Charger")) {
 							double incomingDistance = incoming.getProperty("distance");
 							double distance = incomingDistance + (double)outgoing.getProperty("distance");
+							getMileage(v);
 							if(distance > mileage) {
 								outgoing = addStationsBetween2Stations(outgoingVertex, v, incomingDistance, mileage, graph);
 							}
@@ -105,6 +106,22 @@ public class AddStation {
 		}
 	}
 	
+	private double getMileage(Vertex concernedVertex) {
+    	double mileage = 0D;
+    	double claimedMilage = 40D;
+    	double trafficFactor;
+    	double climateFactor;
+    	double roadQualityFactor;
+    	
+    	trafficFactor = concernedVertex.getProperty("trafficFactor");
+    	climateFactor = concernedVertex.getProperty("climateFactor");
+    	roadQualityFactor = concernedVertex.getProperty("roadQualityFactor");
+    	
+    	double combinedFactor = trafficFactor * climateFactor * roadQualityFactor;
+    	mileage = claimedMilage * combinedFactor;
+    	
+    	return mileage;
+    }
 	
 	/**
      * Add Required number of Stations between 2 Vertices
