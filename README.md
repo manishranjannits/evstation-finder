@@ -1,5 +1,8 @@
 # evstation-finder
 Project for Electric Vehicle Station Location Finder
+This prjoect is a prototype of the solution.
+The solution is described on the pages which will be displayed when you run the project. 
+Use the following steps to run this. You need to have Java installed in your machine (Java 1.8) 
 
 Steps to use this project:
 1) Git Clone
