@@ -23,7 +23,7 @@ public class SimulatorData {
 		try {
 		createLocationType();
 		}catch(Exception e) {
-			System.out.println("Facing error in refreshing database. Retrying...");
+			System.out.println("Refreshing database is taking time. Please wait...");
 			try {
 			Thread.sleep(3000);
 			isErrorFaced = true;

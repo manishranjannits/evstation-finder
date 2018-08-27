@@ -15,6 +15,23 @@ $(function(){
 		    }
 		});
 	}
+	
+	sendForWeightSimulation = function(){
+		$(".loader").css("visibility","visible");
+		$.ajax({
+		    url: "addstationweight",
+		    context: document.body,
+		    success: function(){
+		      $(".simulator-result").css("visibility","visible");
+		      $(".default-setup").css("visibility","hidden");
+		      $(".do-simulation").css("visibility","hidden");
+		      $(".loader").css("visibility","hidden");
+		      window.setTimeout(timeout, 6000);
+
+		      $(".instruction").css("display","block");
+		    }
+		});
+	}
 
 	resetdb = function(){
 		$(".loader").css("visibility","visible");

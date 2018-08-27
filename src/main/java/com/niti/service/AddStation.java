@@ -13,10 +13,10 @@ import com.tinkerpop.blueprints.impls.orient.OrientGraphNoTx;
 
 public class AddStation {
 	
-	public void addStations() {
+	public void addStations(boolean isWeighted) {
 		try {
 			//COde for dijkastra
-			addByDijkastra();
+			addByDijkastra(isWeighted);
 			
 		}catch(Exception e) {
 			
@@ -29,14 +29,14 @@ public class AddStation {
 	}
 	
 	
-	private void addByDijkastra() {
+	private void addByDijkastra(boolean isWeighted) {
 		String edgeClassName = "Road";
 		String weightProp = "distance";
 		
 		OrientGraphNoTx graph = null;
 		try {
 			graph = Application.getGraphNoTx();
-			DijkastraTraverser traverser = new DijkastraTraverser(graph, edgeClassName, weightProp);
+			DijkastraTraverser traverser = new DijkastraTraverser(graph, edgeClassName, weightProp, isWeighted);
 			
 			List<Vertex> listOfVertices = new ArrayList<>(); 
 			graph.getVertices().forEach(v -> {
@@ -56,7 +56,7 @@ public class AddStation {
 				}
 				
 			}
-			addForDelta(graph);
+			addForDelta(graph, isWeighted);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -64,10 +64,10 @@ public class AddStation {
 		
 	}
 	
-	private void addForDelta(OrientGraphNoTx graph) {
+	private void addForDelta(OrientGraphNoTx graph, boolean isWeighted) {
 		
 		try {
-			double mileage = 20D;
+			
 			  //Add code here
 			graph.getVerticesOfClass("Location").forEach(v -> {
 				StringBuilder sb = new StringBuilder();
@@ -89,7 +89,11 @@ public class AddStation {
 						if(incomingVertex.getProperty("type").toString().equalsIgnoreCase("Charger")) {
 							double incomingDistance = incoming.getProperty("distance");
 							double distance = incomingDistance + (double)outgoing.getProperty("distance");
-							getMileage(v);
+							double mileage = 40D;
+							if(isWeighted) {
+								mileage = getMileage(v);
+							}
+							
 							if(distance > mileage) {
 								outgoing = addStationsBetween2Stations(outgoingVertex, v, incomingDistance, mileage, graph);
 							}

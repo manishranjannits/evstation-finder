@@ -25,8 +25,9 @@ public class DijkastraTraverser {
     private Map<String,String>  idPrevNodeIdMap;          //idPrevNodeIdMap(i)     < @rid, previous_node_in_the_shortest_path >
     private String              eClass;     //edge class to use
     private String              prop;       //weight property to use on the edge
+    private boolean isWeightedGp;
 
-    public DijkastraTraverser(OrientGraphNoTx g, String e, String p){
+    public DijkastraTraverser(OrientGraphNoTx g, String e, String p, boolean isWeighted){
         this.graph= g;
         this.eClass = e;
         this.prop = p;
@@ -34,6 +35,7 @@ public class DijkastraTraverser {
         unvisitedSet = new HashSet<String>();
         idWeightMap = new HashMap<String,Double>();
         idPrevNodeIdMap = new HashMap<String,String>();
+        isWeightedGp = isWeighted;
     }
 
 
@@ -303,7 +305,7 @@ public class DijkastraTraverser {
             return null;
         }
         //Mileage to be a calculative value
-        Double mileage = 18D;
+        Double mileage = 40D;
         
         //Start Traversing from End Vertex till Start Vertex is Reached
         while(!i.equals(startV.getId().toString())){
@@ -323,11 +325,14 @@ public class DijkastraTraverser {
             
             Double distance = getWeight(prev, current, Direction.OUT, exclECl);
             
-            if(prev != null) {
-            	mileage = getMileage(prev);
-            }else {
-            	mileage = getMileage(current);
+            if(isWeightedGp) {
+            	if(prev != null) {
+                	mileage = getMileage(prev);
+                }else {
+                	mileage = getMileage(current);
+                }
             }
+            
             
             System.out.println("Milege::" + mileage);
             

@@ -79,7 +79,19 @@ public class MessageController {
 	public @ResponseBody String addStations() {
 		AddStation station = new AddStation();
 		try {
-			station.addStations();
+			station.addStations(false);
+			return "{success: true}";
+		}catch(Exception e) {
+			return "{success: false}";
+		}
+		
+	}
+	
+	@RequestMapping("addstationweight")
+	public @ResponseBody String addStationsWeight() {
+		AddStation station = new AddStation();
+		try {
+			station.addStations(true);
 			return "{success: true}";
 		}catch(Exception e) {
 			return "{success: false}";

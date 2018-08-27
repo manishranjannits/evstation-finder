@@ -43,11 +43,12 @@
 		<h2>EV Station Location Identification Simulator</h2>
 		<p></p>
 		<p>
-			To see Default Setup, click "Check Default Setup" button. Use
+			To see Initial Setup, click "Check Initial Setup" button. Use
 			"username": <b>admin</b> and "password": <b>admin</b>
 			
 		</p>
-		<p>To run Simulator, click "Go" button.</p>
+		<p>To run <b>Simplified Simulator</b> without traffic/climate/road condition factors, click "Run Simple" button.</p>
+		<p>To run <b>Weighted Simulator</b> with traffic/climate/road condition factors, click "Run Weighted" button.</p>
 		<p></p>
 
 		<div class="loader"></div>
@@ -58,10 +59,13 @@
 				
 			<a class="btn btn-lg btn-primary default-setup"
 				href="javascript:void(0)"
-				role="button" onclick="displayinst()">Check Default Setup &raquo;</a>
+				role="button" onclick="displayinst()">Check Initial Setup &raquo;</a>
 			
 			<a class="btn btn-lg btn-primary do-simulation" href="javascript:void(0)"
-				role="button" onclick="sendForSimulation()">Go &raquo;</a>
+				role="button" onclick="sendForSimulation()">Run Simple &raquo;</a>
+			
+			<a class="btn btn-lg btn-primary do-simulation" href="javascript:void(0)"
+				role="button" onclick="sendForWeightSimulation()">Run Weighted &raquo;</a>
 		</p>
 		<p></p>
 		
