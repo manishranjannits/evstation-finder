@@ -1,18 +1,3 @@
-/*
- * Copyright 2012-2018 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package com.niti.web.ui.mvc;
 
@@ -21,7 +6,6 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,15 +15,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.niti.service.AddStation;
 import com.niti.simulator.data.SimulatorData;
+import com.niti.web.ui.Application;
 import com.niti.web.ui.Message;
 import com.niti.web.ui.MessageRepository;
-import com.niti.web.ui.Application;
 
 @Controller
 @RequestMapping("/")
 public class MessageController {
 
 	private final MessageRepository messageRepository;
+	private final String successMsg = "{success: true}";
+	private final String errorMsg = "{success: false}";
 
 	public MessageController(MessageRepository messageRepository) {
 		this.messageRepository = messageRepository;
@@ -92,28 +78,36 @@ public class MessageController {
 	@RequestMapping("addstation")
 	public @ResponseBody String addStations() {
 		AddStation station = new AddStation();
-		station.addStations();
-		station.addDelta();
-		return "{success: true}";
+		try {
+			station.addStations();
+			return "{success: true}";
+		}catch(Exception e) {
+			return "{success: false}";
+		}
+		
 	}
 	
-	@RequestMapping("adddelta")
-	public @ResponseBody String adddelta() {
-		AddStation station = new AddStation();
-		station.addDelta();
-		return "{success: true}";
-	}
 	
 	@RequestMapping("resetdb")
 	public @ResponseBody String resetdb() {
-		Application.clearDb();
-		return "{success: true}";
+		try {
+			Application.clearDb();
+			return successMsg;
+		}catch(Exception e) {
+			return errorMsg;
+		}
+		
 	}
 	
 	@RequestMapping("setup")
 	public @ResponseBody String setup() {
-		SimulatorData.fillSimulatorData(Application.getGraphNoTx());
-		return "{success: true}";
+		try {
+			SimulatorData.fillSimulatorData(Application.getGraphNoTx());
+			return successMsg;
+		}catch(Exception e) {
+			return errorMsg;
+		}
+		
 	}
 
 }

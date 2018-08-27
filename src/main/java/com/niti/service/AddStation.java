@@ -21,10 +21,11 @@ public class AddStation {
 		}catch(Exception e) {
 			
 		}
-	}
-	
-	public void addDelta() {
-		addForDelta();
+		try {
+			Thread.sleep(5000);
+			}catch(Exception ex) {
+				//do nothing
+			}
 	}
 	
 	
@@ -55,6 +56,7 @@ public class AddStation {
 				}
 				
 			}
+			addForDelta(graph);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -62,8 +64,8 @@ public class AddStation {
 		
 	}
 	
-	private void addForDelta() {
-		OrientGraphNoTx graph = Application.getGraphNoTx();
+	private void addForDelta(OrientGraphNoTx graph) {
+		
 		try {
 			double mileage = 40D;
 			  //Add code here

@@ -9,6 +9,8 @@ $(function(){
 		      $(".default-setup").css("visibility","hidden");
 		      $(".do-simulation").css("visibility","hidden");
 		      $(".loader").css("visibility","hidden");
+		      window.setTimeout(timeout, 6000);
+
 		      $(".instruction").css("display","block");
 		    }
 		});
@@ -49,5 +51,9 @@ $(function(){
 	}
 	displayinst = function(){
 		$(".instruction").css("display","block");
+	}
+	
+	timeout = function(){
+		$(".loader").css("visibility","hidden");
 	}
 });
