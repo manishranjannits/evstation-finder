@@ -10,7 +10,7 @@
 2) Goto evstation-finder directory<br/>
 3) Run command: <br/>
 <pre style="width: 200px;"><code class="javascript"><i>mvn spring-boot:run</i></code></pre>
-4) After Server is up and running open the following link in Browser
+4) After Server is up and running open the following link in Browser<br/>
    <a href="http://localhost:8080/index.html" target="_blank">http://localhost:8080/index.html</a>
 <br/>5) Browse through the various Sections to gather understanding of what the project is About.
 <br/><br/><br/>
