@@ -17,7 +17,7 @@
 <p>
    <b>In order to run from executable jar</b>, 
    <p>Please download the Jar from 
-   <a href="https://drive.google.com/open?id=1E6qzfSvA4FtK-AIjZHt4pwHNfUitgXy6" target="_blank">here</a>
+   <a href="https://drive.google.com/open?id=1FzBwrn9uGKchhmWNGjJ64uI1LihPmZ4Y" target="_blank">here</a>
  </p>
 <p>After downloading, open command prompt and go to the folder/directory in which the jar was downloaded.</p>
 <p>Then type the following command:</p>
