@@ -11,7 +11,7 @@
 3) Run command: <br/>
 <pre style="width: 200px;"><code class="javascript"><i>mvn spring-boot:run</i></code></pre>
 4) After Server is up and running open the following link in Browser
-   http://localhost:8080/index.html
+   <a href="http://localhost:8080/index.html" target="_blank">http://localhost:8080/index.html</a>
 <br/>5) Browse through the various Sections to gather understanding of what the project is About.
 <br/><br/><br/>
 <p>
