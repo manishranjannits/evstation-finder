@@ -4,7 +4,7 @@
 <p>The solution is described on the pages which will be displayed when you run the project.</p> 
 <p>Use the following steps to run this. </p>
 <p>You need to have Java installed in your machine <b>(Java 1.8)</b> and Maven</p>
-<br/><br/>
+<br/>
 <b>Steps to use this project:</b><br/>
 1) git clone https://github.com/manishranjannits/evstation-finder.git<br/>
 2) Goto evstation-finder directory<br/>
@@ -16,9 +16,8 @@
 <br/><br/><br/>
 <p>
    <b>In order to run from executable jar</b>, 
-   <p>please download the Jar from 
+   <p>Please download the Jar from 
    <a href="https://drive.google.com/open?id=1E6qzfSvA4FtK-AIjZHt4pwHNfUitgXy6" target="_blank">here</a>
-   
  </p>
 <p>After downloading, open command prompt and go to the folder/directory in which the jar was downloaded.</p>
 <p>Then type the following command:</p>
