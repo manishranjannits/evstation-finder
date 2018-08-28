@@ -5,13 +5,13 @@
 <p>Use the following steps to run this. </p>
 <p>You need to have Java installed in your machine <b>(Java 1.8)</b> and Maven</p>
 <br/><br/><br/>
-<b>Steps to use this project:</b>
-1) git clone https://github.com/manishranjannits/evstation-finder.git
-2) Goto evstation-finder directory
-3) Run command: 
+<b>Steps to use this project:</b><br/>
+1) git clone https://github.com/manishranjannits/evstation-finder.git</p><br/>
+2) Goto evstation-finder directory<br/>
+3) Run command: <br/>
 <pre style="width: 200px;"><code class="javascript"><i>mvn spring-boot:run</i></code></pre>
 4) After Server is up and running open the following link in Browser
-   http://localhost:8080/index.html
+   http://localhost:8080/index.html <br/>
 5) Browse through the various Sections to gather understanding of what the project is About.
 <br/><br/><br/>
 <p>
