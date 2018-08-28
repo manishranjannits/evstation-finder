@@ -1,5 +1,5 @@
 # evstation-finder
-Project for Electric Vehicle Station Location Finder
+<b>Project for Electric Vehicle Station Location Finder</b>
 <p>This project is a prototype of the solution.</p>
 <p>The solution is described on the pages which will be displayed when you run the project.</p> 
 <p>Use the following steps to run this. </p>
@@ -13,7 +13,7 @@ Steps to use this project:
 4) After Server is up and running open the following link in Browser
    http://localhost:8080/index.html
 5) Browse through the various Sections to gather understanding of what the project is About.
-<br/><br/>
+<br/><br/><br/>
 <p>
    <b>In order to run from executable jar</b>, please download the Jar from 
    <a href="https://drive.google.com/open?id=1E6qzfSvA4FtK-AIjZHt4pwHNfUitgXy6" target="_blank">here</a>
