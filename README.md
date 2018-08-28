@@ -24,6 +24,6 @@
 <p>Then type the following command:</p>
 <pre style="width: 200px;"><code class="javascript"><i>java -jar station-finder.jar</i></code></pre>
 <p>After this, execute Steps 4 and 5 as mentioned above</p>
-
-Demonstration Video Link on <a href="https://youtu.be/JtALuJo80TA" target="_blank">Youtube</a>
+<br/>
+<b>Demonstration Video</b> Link on <a href="https://youtu.be/JtALuJo80TA" target="_blank">Youtube</a>
 
