@@ -317,11 +317,18 @@ section.section {
 
 /* --- section heading --- */
 .section-header {
-	text-align: center;
+	text-align: left;
 }
 .section-header h2.section-heading {
 	text-transform: uppercase;
+	text-align: center;
 	font-weight: 700;
+}
+.section-header h3.section-heading {
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: 700;
+	font-size:24px;
 }
 
 /* ==========================
