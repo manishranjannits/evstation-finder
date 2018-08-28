@@ -15,12 +15,14 @@ Steps to use this project:
 5) Browse through the various Sections to gather understanding of what the project is About.
 
 <p>
-   In order to run from executable jar, please download the Jar from https://drive.google.com/open?id=1E6qzfSvA4FtK-AIjZHt4pwHNfUitgXy6
+   In order to run from executable jar, please download the Jar from 
+   <a href="https://drive.google.com/open?id=1E6qzfSvA4FtK-AIjZHt4pwHNfUitgXy6" target="_blank">here</a>
+   
  </p>
 <p>After downloading, open command prompt and go to the folder/directory in which the jar was downloaded.</p>
 <p>Then type the following command:</p>
 <pre style="width: 200px;"><code class="javascript"><i>java -jar station-finder.jar</i></code></pre>
 <p>After this, execute Steps 4 and 5 as mentioned above</p>
 
-Demonstration Video Link
-https://youtu.be/JtALuJo80TA
+Demonstration Video Link on <a href="https://youtu.be/JtALuJo80TA" target="_blank">Youtube</a>
+
