@@ -8,7 +8,8 @@ Project for Electric Vehicle Station Location Finder
 Steps to use this project:
 1) git clone https://github.com/manishranjannits/evstation-finder.git
 2) Goto evstation-finder directory
-3) Run command: mvn spring-boot:run
+3) Run command: 
+<pre style="width: 200px;"><code class="javascript"><i>mvn spring-boot:run</i></code></pre>
 4) After Server is up and running open the following link in Browser
    http://localhost:8080/index.html
 5) Browse through the various Sections to gather understanding of what the project is About.
@@ -18,7 +19,7 @@ Steps to use this project:
  </p>
 <p>After downloading, open command prompt and go to the folder/directory in which the jar was downloaded.</p>
 <p>Then type the following command:</p>
-<p>java -jar station-finder.jar</p>
+<pre style="width: 200px;"><code class="javascript"><i>java -jar station-finder.jar</i></code></pre>
 <p>After this, execute Steps 4 and 5 as mentioned above</p>
 
 Demonstration Video Link
