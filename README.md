@@ -13,6 +13,13 @@ Steps to use this project:
    http://localhost:8080/index.html
 5) Browse through the various Sections to gather understanding of what the project is About.
 
+<p>
+   In order to run from executable jar, please download the Jar from https://drive.google.com/open?id=1E6qzfSvA4FtK-AIjZHt4pwHNfUitgXy6
+ </p>
+<p>After downloading, open command prompt and go to the folder/directory in which the jar was downloaded.</p>
+<p>Then type the following command:</p>
+<p>java -jar station-finder.jar</p>
+<p>After this, execute Steps 4 and 5 as mentioned above</p>
 
 Demonstration Video Link
 https://youtu.be/JtALuJo80TA
