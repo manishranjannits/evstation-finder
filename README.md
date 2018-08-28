@@ -13,9 +13,9 @@ Steps to use this project:
 4) After Server is up and running open the following link in Browser
    http://localhost:8080/index.html
 5) Browse through the various Sections to gather understanding of what the project is About.
-
+<br/><br/>
 <p>
-   In order to run from executable jar, please download the Jar from 
+   <b>In order to run from executable jar</b>, please download the Jar from 
    <a href="https://drive.google.com/open?id=1E6qzfSvA4FtK-AIjZHt4pwHNfUitgXy6" target="_blank">here</a>
    
  </p>
