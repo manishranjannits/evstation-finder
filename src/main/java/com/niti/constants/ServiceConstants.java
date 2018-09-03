@@ -13,4 +13,13 @@ public class ServiceConstants {
 	public static String PROPERTY_NAME = "name";
 	public static String PROPERTY_TYPE = "type";
 	public static String TYPE_PLACE = "place";
+	public static String STATION_CLASS = "Station";
+
+
+	//error Code
+    public static String SUCCESS_CODE = "200";
+    public static String SUCCESS_MESSAGE = "Successfully populate the lat long";
+    public static String ERROR_CODE = "404";
+    public static String ERROR_MESSAGE = "Not able to get the lat long";
+
 }

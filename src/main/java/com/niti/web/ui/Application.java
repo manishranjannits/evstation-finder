@@ -10,7 +10,7 @@ import com.niti.simulator.data.SimulatorData;
 import com.orientechnologies.orient.core.command.script.OCommandFunction;
 import com.tinkerpop.blueprints.impls.orient.OrientGraphNoTx;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.niti"})
 public class Application {
 
 	private static OrientGraphNoTx graphNoTx = null;
