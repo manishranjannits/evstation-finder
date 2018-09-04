@@ -35,12 +35,12 @@ public class Application {
 	}
 	
 	public static void clearDb() {
-		graphNoTx.command(
-		          new OCommandFunction(ServiceConstants.RESET_COMMAND)).execute();
 		try {
+			graphNoTx.command(
+					new OCommandFunction(ServiceConstants.RESET_COMMAND)).execute();
 			System.out.println("Refreshing Simulator database...");
 			Thread.sleep(8000);
-		} catch (InterruptedException e) {
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 	}
@@ -49,7 +49,7 @@ public class Application {
 		initializeDb();
 		clearDb();
 		
-		SimulatorData.fillSimulatorData(graphNoTx);
+		//SimulatorData.fillSimulatorData(graphNoTx);
 		SpringApplication.run(Application.class, args);
 	}
 	

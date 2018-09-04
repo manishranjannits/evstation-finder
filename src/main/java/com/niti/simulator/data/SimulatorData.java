@@ -2,6 +2,7 @@ package com.niti.simulator.data;
 
 import java.text.DecimalFormat;
 
+import com.niti.web.ui.Application;
 import com.orientechnologies.orient.core.metadata.schema.OType;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
@@ -77,6 +78,9 @@ public class SimulatorData {
     }
     
     public static Vertex addStation(String name, Double lat, Double lon, String locType) {
+		if(graph==null){
+			graph = Application.getGraphNoTx();
+		}
     	Vertex location = graph.addVertex("class:Station");
     	location.setProperty("name", name);
     	location.setProperty("lat", lat);

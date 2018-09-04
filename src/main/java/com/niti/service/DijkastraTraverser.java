@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.niti.constants.ServiceConstants;
 import com.niti.simulator.data.SimulatorData;
@@ -19,8 +20,8 @@ import com.tinkerpop.blueprints.impls.orient.OrientGraphNoTx;
 public class DijkastraTraverser {
 
     private OrientGraphNoTx         graph;          //graph DB
-    private Set<String>         visitedSet;          //visited rids
-    private Set<String>         unvisitedSet;          //to visit rids
+    private Map<String,String>         visitedSet;          //visited rids
+    private Map<String,String>         unvisitedSet;          //to visit rids
     private Map<String,Double> idWeightMap;          //idWeightMap(i)     < @rid, weight_to_get_to_@rid >
     private Map<String,String>  idPrevNodeIdMap;          //idPrevNodeIdMap(i)     < @rid, previous_node_in_the_shortest_path >
     private String              eClass;     //edge class to use
@@ -31,10 +32,10 @@ public class DijkastraTraverser {
         this.graph= g;
         this.eClass = e;
         this.prop = p;
-        visitedSet = new HashSet<String>();
-        unvisitedSet = new HashSet<String>();
-        idWeightMap = new HashMap<String,Double>();
-        idPrevNodeIdMap = new HashMap<String,String>();
+        visitedSet = new ConcurrentHashMap<>();
+        unvisitedSet = new ConcurrentHashMap<>();
+        idWeightMap = new ConcurrentHashMap<>();
+        idPrevNodeIdMap = new ConcurrentHashMap<>();
         isWeightedGp = isWeighted;
     }
 
@@ -44,23 +45,26 @@ public class DijkastraTraverser {
     // (Vertex start_vertex, Vertex dest_vertex, Direction.IN/OUT/BOTH, Set of edge rids to exclude) 
     private void findPath(Vertex startV, Vertex endV, Direction dir, Set<String> excludeEdgeRids){      
 
+        if(startV==null){
+            return;
+        }
     //init
-    	visitedSet.clear();
+    	/*visitedSet.clear();
     	unvisitedSet.clear();
         idWeightMap.clear();
-        idPrevNodeIdMap.clear();
+        idPrevNodeIdMap.clear();*/
 
     //step1
         Iterator<Vertex> vertex = graph.getVerticesOfClass(ServiceConstants.LOCATION_CLASS).iterator();
         while(vertex.hasNext()){
             Vertex ver = vertex.next();
             idWeightMap.put(ver.getId().toString(), Double.MAX_VALUE);
-            unvisitedSet.add(ver.getId().toString());
+            unvisitedSet.put(ver.getId().toString(),"");
         }
         idWeightMap.put(startV.getId().toString(), 0D);        //idWeightMap(startV) = 0
-        idPrevNodeIdMap.put(startV.getId().toString(), null);     //idPrevNodeIdMap(startV) = null
+        idPrevNodeIdMap.put(startV.getId().toString(), "");     //idPrevNodeIdMap(startV) = null
         unvisitedSet.remove(startV.getId().toString());        //startV visited => removed from unvisitedSet
-        visitedSet.add(startV.getId().toString());           //  and added in visitedSet
+        visitedSet.put(startV.getId().toString(),"");           //  and added in visitedSet
 
 
 
@@ -75,10 +79,10 @@ public class DijkastraTraverser {
 
     //step2
         Boolean cont = false;
-        Iterator<String> t = unvisitedSet.iterator();
+        Iterator<String> t = unvisitedSet.keySet().iterator();
         while(t.hasNext()){
             String i = t.next();
-            if(idWeightMap.get(i)!=Double.MAX_VALUE){
+            if(idWeightMap!=null && idWeightMap.get(i)!=null && idWeightMap.get(i)!=Double.MAX_VALUE){
                 cont = true;
             }
         }
@@ -86,16 +90,16 @@ public class DijkastraTraverser {
 
             String j = startV.getId().toString();
             Double ff = Double.MAX_VALUE;
-            t = unvisitedSet.iterator();
+            t = unvisitedSet.keySet().iterator();
             while(t.hasNext()){
                 String i = t.next();
-                if(idWeightMap.get(i)<=ff){
+                if(idWeightMap!=null && idWeightMap.get(i)<=ff){
                     ff = idWeightMap.get(i);
                     j = i;
                 }
             }
             unvisitedSet.remove(j);
-            visitedSet.add(j);
+            visitedSet.put(j,"");
             if(unvisitedSet.isEmpty()){
                 break;
             }
@@ -106,7 +110,7 @@ public class DijkastraTraverser {
             while(near.hasNext()){
                 Vertex vic = near.next();
                 String i = vic.getId().toString();
-                if( (unvisitedSet.contains(i)) && (idWeightMap.get(i) > (idWeightMap.get(j) + weight(j,i,dir,excludeEdgeRids))) ){
+                if( (unvisitedSet.containsKey(i)) && (idWeightMap.get(i) > (idWeightMap.get(j) + weight(j,i,dir,excludeEdgeRids))) ){
                     if(weight(j,i,dir,excludeEdgeRids)==Double.MAX_VALUE){
                     	idWeightMap.put(i, Double.MAX_VALUE);
                     }else{
@@ -118,7 +122,7 @@ public class DijkastraTraverser {
 
             //shall we continue?
             cont = false;
-            t = unvisitedSet.iterator();
+            t = unvisitedSet.keySet().iterator();
             while(t.hasNext()){
                 String i = t.next();
                 if(idWeightMap.get(i)!=Double.MAX_VALUE){
@@ -153,8 +157,7 @@ public class DijkastraTraverser {
         while(eS.hasNext()){
             Edge e = eS.next();
             
-            if(e.getProperty("out").toString().equals(rid_b) || e.getProperty("in").toString().equals(rid_b) || 
-            		e.getProperty("out").toString().equals(rid_b_station) || e.getProperty("in").toString().equals(rid_b_station) ) {
+            if(isGoodEdge(rid_b, rid_b_station, e)) {
             	goodEdges.add(e);
             }
             
@@ -162,7 +165,7 @@ public class DijkastraTraverser {
         Iterator<Edge> edges= goodEdges.iterator();
         while(edges.hasNext()){
             Edge e=edges.next();
-                dd = e.getProperty(prop);
+                dd = (double)e.getProperty(prop);
                 if(dd<d){
                     d=dd;
                 }
@@ -170,7 +173,15 @@ public class DijkastraTraverser {
         
         return d;
     }
-    
+
+    private boolean isGoodEdge(String rid_b, String rid_b_station, Edge e) {
+        try {
+            return e.getProperty("out").toString().equals(rid_b) || e.getProperty("in").toString().equals(rid_b) ||
+                    e.getProperty("out").toString().equals(rid_b_station) || e.getProperty("in").toString().equals(rid_b_station);
+        }catch(Exception exception){}
+        return false;
+    }
+
     /**
      * Add Required number of Stations between 2 Vertices
      * @param prev
@@ -181,6 +192,7 @@ public class DijkastraTraverser {
      */
     
     private void addStationsBetween2Nodes(Vertex prev, Vertex current, Double distance, Double mileage, List<Vertex> path) {
+        System.out.println("Trying to add station " + prev.getProperty("id"));
     	Vertex chargerVertex = null;
     	double prevLat;
     	double prevLon;
@@ -286,7 +298,7 @@ public class DijkastraTraverser {
     
     private double getMileage(Vertex concernedVertex) {
     	double mileage = 0D;
-    	double claimedMilage = 0.40D;
+    	double claimedMilage = ServiceConstants.CLAIMED_MILEAGE;
     	double trafficFactor;
     	double climateFactor;
     	double roadQualityFactor;
@@ -356,12 +368,12 @@ public class DijkastraTraverser {
         i = endV.getId().toString();
         path.add(endV);
         
-        if(idWeightMap.get(endV.getId().toString()) == Double.MAX_VALUE){
+        if(endV==null || endV.getId() == null ||idWeightMap==null || idWeightMap.get(endV.getId().toString())==null || idWeightMap.get(endV.getId().toString()) == Double.MAX_VALUE){
             return null;
         }
         //Mileage to be a calculative value
-        Double mileage = 0.40D;
-        
+        Double mileage = ServiceConstants.MILEAGE;
+
         //Start Traversing from End Vertex till Start Vertex is Reached
         while(!i.equals(startV.getId().toString())){
         	
@@ -423,7 +435,8 @@ public class DijkastraTraverser {
             return null;
         }
         for(Vertex v : path){
-            pathS.add(v.getProperty(ServiceConstants.PROPERTY_NAME).toString());
+            System.out.println("vertex : "+v.getProperty("id"));
+            pathS.add(v.getProperty(ServiceConstants.PROPERTY_NAME)==null ? "" : v.getProperty(ServiceConstants.PROPERTY_NAME).toString());
         }
         return pathS;
     }

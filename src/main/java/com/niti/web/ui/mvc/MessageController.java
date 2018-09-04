@@ -114,7 +114,7 @@ public class MessageController {
 	@RequestMapping("setup")
 	public @ResponseBody String setup() {
 		try {
-			SimulatorData.fillSimulatorData(Application.getGraphNoTx());
+			//SimulatorData.fillSimulatorData(Application.getGraphNoTx());
 			return successMsg;
 		}catch(Exception e) {
 			return errorMsg;
