@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Future of Mobility - Simulator</title>
+<body>
+  <div id="mapdiv"></div>
+  <script src="js/jquery.js"></script>
+  <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+  <script>
+	var map = new OpenLayers.Map("mapdiv");
+	function showMap(res) {
+  		console.log(res);
+  	    map.addLayer(new OpenLayers.Layer.OSM());
+		if(res && res.code==200 && res.listOfStationDetails && res.listOfStationDetails.length>0) {
+			for(count=0; count<res.listOfStationDetails.length; count++) {
+				var lonLat = new OpenLayers.LonLat( res.listOfStationDetails[count].longitude, res.listOfStationDetails[count].latitude )
+	  	          .transform(
+	  	            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+	  	            map.getProjectionObject() // to Spherical Mercator Projection
+	  	          );
+		  	    var markers = new OpenLayers.Layer.Markers( "Markers" );
+		  	 	map.addLayer(markers);
+		  		markers.addMarker(new OpenLayers.Marker(lonLat));
+
+			}
+		}
+		var lonLat = new OpenLayers.LonLat( res.listOfStationDetails[0].longitude, res.listOfStationDetails[0].latitude )
+          .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
+          );
+  	    var zoom=12;
+  	    map.setCenter (lonLat, zoom);
+  	}
+	//showMap("");
+ 
+  $(function(){
+	  
+			$(".loader").css("visibility","visible");
+			$.get("/v1/getStationDetails",
+			    function(res){
+				showMap(res);
+			    }
+			);
+	});
+  </script>
+</body>
+
+</html>

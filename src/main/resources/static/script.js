@@ -10,10 +10,11 @@ $(function(){
 		      $(".do-simulation").css("visibility","hidden");
 		      $(".loader").css("visibility","hidden");
 		      window.setTimeout(timeout, 6000);
-
-		      $(".instruction").css("display","block");
+		      window.open("http://localhost:8080/graph.html");
+		      //$(".instruction").css("display","block");
 		    }
 		});
+		
 	}
 	
 	sendForWeightSimulation = function(){
@@ -27,8 +28,8 @@ $(function(){
 		      $(".do-simulation").css("visibility","hidden");
 		      $(".loader").css("visibility","hidden");
 		      window.setTimeout(timeout, 6000);
-
-		      $(".instruction").css("display","block");
+		      window.open("http://localhost:8080/graph.html");
+		      //$(".instruction").css("display","block");
 		    }
 		});
 	}
