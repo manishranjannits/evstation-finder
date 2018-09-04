@@ -89,7 +89,7 @@ public class AddStation {
 						if(incomingVertex.getProperty("type").toString().equalsIgnoreCase("Charger")) {
 							double incomingDistance = incoming.getProperty("distance");
 							double distance = incomingDistance + (double)outgoing.getProperty("distance");
-							double mileage = 40D;
+							double mileage = 0.4D;
 							if(isWeighted) {
 								mileage = getMileage(v);
 							}
@@ -112,7 +112,7 @@ public class AddStation {
 	
 	private double getMileage(Vertex concernedVertex) {
     	double mileage = 0D;
-    	double claimedMilage = 40D;
+    	double claimedMilage = 0.4D;
     	double trafficFactor;
     	double climateFactor;
     	double roadQualityFactor;

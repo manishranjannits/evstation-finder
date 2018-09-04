@@ -11,7 +11,7 @@ $(function(){
 		      $(".loader").css("visibility","hidden");
 		      window.setTimeout(timeout, 6000);
 		      window.open("http://localhost:8080/graph.html");
-		      //$(".instruction").css("display","block");
+		      $(".instruction").css("display","block");
 		    }
 		});
 		
@@ -29,7 +29,7 @@ $(function(){
 		      $(".loader").css("visibility","hidden");
 		      window.setTimeout(timeout, 6000);
 		      window.open("http://localhost:8080/graph.html");
-		      //$(".instruction").css("display","block");
+		      $(".instruction").css("display","block");
 		    }
 		});
 	}

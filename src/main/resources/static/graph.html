@@ -12,7 +12,7 @@
   	    map.addLayer(new OpenLayers.Layer.OSM());
 		if(res && res.code==200 && res.listOfStationDetails && res.listOfStationDetails.length>0) {
 			for(count=0; count<res.listOfStationDetails.length; count++) {
-				var lonLat = new OpenLayers.LonLat( res.listOfStationDetails[count].longitude, res.listOfStationDetails[count].latitude )
+				var lonLat = new OpenLayers.LonLat( roundMe(res.listOfStationDetails[count].longitude), roundMe(res.listOfStationDetails[count].latitude) )
 	  	          .transform(
 	  	            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
 	  	            map.getProjectionObject() // to Spherical Mercator Projection
@@ -23,7 +23,7 @@
 
 			}
 		}
-		var lonLat = new OpenLayers.LonLat( res.listOfStationDetails[0].longitude, res.listOfStationDetails[0].latitude )
+		var lonLat = new OpenLayers.LonLat( roundMe(res.listOfStationDetails[0].longitude), roundMe(res.listOfStationDetails[0].latitude) )
           .transform(
             new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
             map.getProjectionObject() // to Spherical Mercator Projection
@@ -31,6 +31,12 @@
   	    var zoom=12;
   	    map.setCenter (lonLat, zoom);
   	}
+	function roundMe(num) {
+		console.log(num);
+		num = Math.floor(num * 1000000) / 1000000;
+		console.log(num);
+		return num;
+	}
 	//showMap("");
  
   $(function(){

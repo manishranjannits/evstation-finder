@@ -42,18 +42,18 @@ public class SimulatorData {
 	}
 	
 	private static void addLocations() {
-		Vertex newDelhi = addLocation("New Delhi", 12.34, 12.34, "place", 0.8, 0.7, 0.5);
-		Vertex ina = addLocation("INA", 13.34, 13.34, "place", 0.9, 0.6, 0.7);
-		Vertex gp = addLocation("Green Park", 14.34, 14.34, "place", 0.7, 0.8, 0.6);
-		Vertex ai = addLocation("AIIMS", 15.34, 15.34, "place", 0.7, 0.7, 0.7);
-		Vertex hk = addLocation("Hauz Khaz", 16.34, 16.34, "place", 0.8, 0.7, 0.6);
+		Vertex lg = addLocation("Lodhi Garden", 28.5931, 77.2197, "place", 0.8, 0.7, 0.5);
+		Vertex jb = addLocation("Jor Bagh", 28.5878, 77.2153, "place", 0.9, 0.6, 0.7);
+		Vertex ai = addLocation("AIIMS", 28.62623, 77.21808, "place", 0.7, 0.8, 0.6);
+		Vertex in = addLocation("INA", 28.576278, 77.212032, "place", 0.7, 0.7, 0.7);
+		Vertex hk = addLocation("Hauz Khaz", 28.549507, 77.203613, "place", 0.8, 0.7, 0.6);
 		
-		addRoad("Road 1", 100.5, newDelhi, ina);
-		addRoad("Road 2", 90.5, ina, gp);
-		addRoad("Road 3", 80.5, gp, ai);
-		addRoad("Road 4", 70.5, ai, hk);
-		addRoad("Road 4", 30.5, hk, ai);
-		addRoad("Road 5", 66.5, ina, ai);
+		addRoad("Road 1", 3.0, lg, jb);
+		addRoad("Road 2", 2.8, jb, ai);
+		addRoad("Road 3", 1.5, ai, in);
+		addRoad("Road 4", 3.2, in, hk);
+		addRoad("Road 4", 3.2, hk, in);
+		addRoad("Road 5", 1.8, jb, ai);
 	}
 	
 	public static Vertex addLocation(String name, Double lat, Double lon, String locType, 

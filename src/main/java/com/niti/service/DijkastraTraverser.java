@@ -189,15 +189,25 @@ public class DijkastraTraverser {
     	double lat;
     	double lon;
     	double distanceLeft;
+    	double distanceInMiles = distance * 0.621371;
+    	double mileageInMiles = mileage * 0.621371;
     	int countOfStations = (int)(distance/mileage);
-    	
+    	//System.out.println("Prev == " + prev.getProperty("name")+ " :: "+ prev.getProperty("lat") +", "+prev.getProperty("lon"));
+		prevLat = prev.getProperty("lat");
+    	prevLon = prev.getProperty("lon");
+    	currentLat = current.getProperty("lat");
+    	currentLon = current.getProperty("lon");
+    	double radians = Math.atan2((currentLon - prevLon), (currentLat - prevLat));
     	for(int c=1; c<= countOfStations && distance > mileage; c++) {
     		prevLat = prev.getProperty("lat");
         	prevLon = prev.getProperty("lon");
         	currentLat = current.getProperty("lat");
         	currentLon = current.getProperty("lon");
-        	lat = (currentLat + prevLat) * mileage * c/distance;
-        	lon = (currentLon + prevLon) * mileage * c/distance; 
+        	List<Double> list = destVincenty(prevLat, prevLon,radians,mileage*1000);
+        	lat = list.get(0);
+        	lon = list.get(1);
+        	//System.out.println("Radians = "+ radians +", cos = "+Math.cos(radians)+", mileage = "+mileageInMiles);
+        	//System.out.println("Lat = "+lat+", Lon = "+lon);
         	chargerVertex = SimulatorData.addStation(ServiceConstants.CHARGER_CLASS, lat, lon, ServiceConstants.CHARGER_CLASS);
         	Edge edge1 = SimulatorData.addRoad("Charger 1", mileage, prev, chargerVertex);
 			distanceLeft = distance - mileage;
@@ -210,7 +220,52 @@ public class DijkastraTraverser {
 			distance = distanceLeft;
     	}
     }
-    
+    private double toRad(double n) {
+    	 return n * Math.PI / 180;
+    	}
+    private double toDeg(double n) {
+    	 return n * 180 / Math.PI;
+    	}
+    private List<Double>  destVincenty(double lat1,double lon1,double alpha1,double dist) {
+    	 double a = 6378137,
+    		     b = 6356752.3142,
+    		     f = 1 / 298.257223563, // WGS-84 ellipsiod
+    		     s = dist,
+    		     sinAlpha1 = Math.sin(alpha1),
+    		     cosAlpha1 = Math.cos(alpha1),
+    		     tanU1 = (1 - f) * Math.tan(toRad(lat1)),
+    		     cosU1 = 1 / Math.sqrt((1 + tanU1 * tanU1)), sinU1 = tanU1 * cosU1,
+    		     sigma1 = Math.atan2(tanU1, cosAlpha1),
+    		     sinAlpha = cosU1 * sinAlpha1,
+    		     cosSqAlpha = 1 - sinAlpha * sinAlpha,
+    		     uSq = cosSqAlpha * (a * a - b * b) / (b * b),
+    		     A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq))),
+    		     B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq))),
+    		     sigma = s / (b * A),
+    		     sigmaP = 2 * Math.PI;
+    	 double cos2SigmaM = Math.cos(2 * sigma1 + sigma),
+   		      sinSigma = Math.sin(sigma),
+   		      cosSigma = Math.cos(sigma),
+   		      deltaSigma = B * sinSigma * (cos2SigmaM + B / 4 * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) - B / 6 * cos2SigmaM * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)));
+    		 while (Math.abs(sigma - sigmaP) > 1e-12) {
+    			 cos2SigmaM = Math.cos(2 * sigma1 + sigma);
+    		      sinSigma = Math.sin(sigma);
+    		      cosSigma = Math.cos(sigma);
+    		      deltaSigma = B * sinSigma * (cos2SigmaM + B / 4 * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) - B / 6 * cos2SigmaM * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)));
+    		      sigmaP = sigma;
+    		  sigma = s / (b * A) + deltaSigma;
+    		 };
+    		 double tmp = sinU1 * sinSigma - cosU1 * cosSigma * cosAlpha1,
+    		     lat2 = Math.atan2(sinU1 * cosSigma + cosU1 * sinSigma * cosAlpha1, (1 - f) * Math.sqrt(sinAlpha * sinAlpha + tmp * tmp)),
+    		     lambda = Math.atan2(sinSigma * sinAlpha1, cosU1 * cosSigma - sinU1 * sinSigma * cosAlpha1),
+    		     C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha)),
+    		     L = lambda - (1 - C) * f * sinAlpha * (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM))),
+    		     revAz = Math.atan2(sinAlpha, -tmp); // final bearing
+    		 List<Double> list = new ArrayList<>();
+    		 list.add(toDeg(lat2));
+    		 list.add(lon1 + toDeg(L));
+    		 return list;
+    		}
     /**
      * Returns Edge between 2 neighbouring Vertices
      * @param start
@@ -231,7 +286,7 @@ public class DijkastraTraverser {
     
     private double getMileage(Vertex concernedVertex) {
     	double mileage = 0D;
-    	double claimedMilage = 40D;
+    	double claimedMilage = 0.40D;
     	double trafficFactor;
     	double climateFactor;
     	double roadQualityFactor;
@@ -305,7 +360,7 @@ public class DijkastraTraverser {
             return null;
         }
         //Mileage to be a calculative value
-        Double mileage = 40D;
+        Double mileage = 0.40D;
         
         //Start Traversing from End Vertex till Start Vertex is Reached
         while(!i.equals(startV.getId().toString())){
