@@ -2,6 +2,8 @@ package com.niti.constants;
 
 public class ServiceConstants {
 
+	public static final Double MILAGE = 4D;
+	public static final double CLAIMED_MILAGE = 4D;
 	public static String DB_FOLDER = "/data/databases/testdb";
 	public static String DB_USERNAME = "admin";
 	public static String DB_PASSWORD = "admin";

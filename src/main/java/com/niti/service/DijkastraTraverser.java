@@ -360,7 +360,7 @@ public class DijkastraTraverser {
             return null;
         }
         //Mileage to be a calculative value
-        Double mileage = 0.40D;
+        Double mileage = ServiceConstants.MILAGE;
         
         //Start Traversing from End Vertex till Start Vertex is Reached
         while(!i.equals(startV.getId().toString())){

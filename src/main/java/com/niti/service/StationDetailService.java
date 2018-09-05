@@ -30,6 +30,7 @@ public class StationDetailService {
             if(nodeVertex!=null){
                 stationDetails.setLatitude(nodeVertex.getProperty("lat"));
                 stationDetails.setLongitude(nodeVertex.getProperty("lon"));
+                stationDetails.setName(nodeVertex.getProperty("name"));
                 detailsList.add(stationDetails);
             }
         }
