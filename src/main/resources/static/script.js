@@ -10,7 +10,7 @@ $(function(){
 		      $(".do-simulation").css("visibility","hidden");
 		      $(".loader").css("visibility","hidden");
 		      window.setTimeout(timeout, 6000);
-		      window.open("http://localhost:8080/graph.html");
+		      window.open("http://newdelhi.centralindia.cloudapp.azure.com:8080/graph.html");
 		      $(".instruction").css("display","block");
 		    }
 		});
@@ -28,7 +28,7 @@ $(function(){
 		      $(".do-simulation").css("visibility","hidden");
 		      $(".loader").css("visibility","hidden");
 		      window.setTimeout(timeout, 6000);
-		      window.open("http://localhost:8080/graph.html");
+		      window.open("http://http://newdelhi.centralindia.cloudapp.azure.com:8080/graph.html");
 		      $(".instruction").css("display","block");
 		    }
 		});
